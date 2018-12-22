@@ -19,7 +19,7 @@ import io.lumine.xikage.mythicmobs.drops.Drop;
 import io.lumine.xikage.mythicmobs.skills.SkillCondition;
 import io.lumine.xikage.mythicmobs.skills.SkillMechanic;
 
-public class CustomMechanics extends JavaPlugin implements Listener {
+public class APIExamples extends JavaPlugin implements Listener {
 
 	private Logger log;
 	 
