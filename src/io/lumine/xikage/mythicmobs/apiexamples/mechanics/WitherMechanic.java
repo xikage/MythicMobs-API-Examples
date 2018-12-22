@@ -19,20 +19,19 @@ public class WitherMechanic extends SkillMechanic implements ITargetedEntitySkil
     protected final int duration;
     protected final int level;
     
-    public WitherMechanic(String line, MythicLineConfig mlc) {
-        super(line, mlc);
+    public WitherMechanic(MythicLineConfig config) {
+        super(config.getLine(), config);
         this.setAsyncSafe(false);
         this.setTargetsCreativePlayers(false);
         
-        this.duration = mlc.getInteger(new String[] {"duration", "d"}, 100);
-        this.level = mlc.getInteger(new String[] {"level", "l"}, 0);
+        this.duration = config.getInteger(new String[] {"duration", "d"}, 100);
+        this.level = config.getInteger(new String[] {"level", "l"}, 0);
         
         MythicMobs.log("Custom Wither mechanic loaded!");
     }
 
     @Override
     public boolean castAtEntity(SkillMetadata data, AbstractEntity target) {
-    	Entity bukkitCaster = BukkitAdapter.adapt(data.getCaster().getEntity());
     	LivingEntity bukkitTarget = (LivingEntity) BukkitAdapter.adapt(target);
     	
     	bukkitTarget.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, duration, level));

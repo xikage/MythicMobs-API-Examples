@@ -17,8 +17,8 @@ public class SpecialItem extends Drop implements IMultiDrop {
 
 	private Material material;
 	
-	public SpecialItem(String line, MythicLineConfig config) {
-		super(line, config);
+	public SpecialItem(MythicLineConfig config) {
+		super(config.getLine(), config);
 		
 		String str = config.getString(new String[] {"type", "t"}, dropVar);
 		
@@ -32,11 +32,9 @@ public class SpecialItem extends Drop implements IMultiDrop {
 		final ItemStack item = new ItemStack(material, 1);
 		final ItemMeta meta = item.getItemMeta();
 		
-		meta.setDisplayName("SPECIAL");
+		meta.setDisplayName("SPECIAL EXAMPLE ITEM");
 		item.setItemMeta(meta);
-		
-		MythicMobs.log("FUCKFUCK " + this.getLine());
-		
+
 		loot.add(new ItemDrop(this.getLine(), (MythicLineConfig) this.getConfig(), new BukkitItemStack(item)));
 		
 		return loot;

@@ -42,8 +42,8 @@ public class CustomMechanics extends JavaPlugin implements Listener {
 	public void onMythicMechanicLoad(MythicMechanicLoadEvent event)	{
 		log.info("MythicMechanicLoadEvent called for mechanic " + event.getMechanicName());
 		
-		if(event.getMechanicName().toUpperCase().equals("WITHER"))	{
-			SkillMechanic mechanic = new WitherMechanic(event.getContainer().getConfigLine(), event.getConfig());
+		if(event.getMechanicName().equalsIgnoreCase("WITHER"))	{
+			SkillMechanic mechanic = new WitherMechanic(event.getConfig());
 			event.register(mechanic);
 			log.info("-- Registered WITHER mechanic!");
 		}
@@ -56,7 +56,7 @@ public class CustomMechanics extends JavaPlugin implements Listener {
 	public void onMythicConditionLoad(MythicConditionLoadEvent event)	{
 		log.info("MythicConditionLoadEvent called for condition " + event.getConditionName());
 
-		if(event.getConditionName().toUpperCase().equals("INVEHICLE"))	{
+		if(event.getConditionName().equalsIgnoreCase("INVEHICLE"))	{
 			SkillCondition condition = new InVehicleCondition(event.getConfig());
 			event.register(condition);
 			log.info("-- Registered InVehicle dondition!");
@@ -70,8 +70,8 @@ public class CustomMechanics extends JavaPlugin implements Listener {
 	public void onMythicDropLoad(MythicDropLoadEvent event)	{
 		log.info("MythicDropLoadEvent called for drop " + event.getDropName());
 
-		if(event.getDropName().toUpperCase().equals("SPECIAL"))	{
-			Drop drop = new SpecialItem(event.getContainer().getLine(), event.getConfig());
+		if(event.getDropName().equalsIgnoreCase("SPECIAL"))	{
+			Drop drop = new SpecialItem(event.getConfig());
 			event.register(drop);
 			log.info("-- Registered SPECIAL drop!");
 		}
