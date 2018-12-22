@@ -1,0 +1,4 @@
+name: MythicMobsCustomMechanicExample
+main: io.lumine.xikage.examples.CustomMechanics
+version: 1.0
+depend: [MythicMobs]
