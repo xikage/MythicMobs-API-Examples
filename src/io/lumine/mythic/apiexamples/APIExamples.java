@@ -1,4 +1,4 @@
-package io.lumine.xikage.mythicmobs.apiexamples;
+package io.lumine.mythic.apiexamples;
 
 import java.util.logging.Logger;
 
@@ -9,15 +9,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
-import io.lumine.xikage.mythicmobs.api.bukkit.events.MythicConditionLoadEvent;
-import io.lumine.xikage.mythicmobs.api.bukkit.events.MythicDropLoadEvent;
-import io.lumine.xikage.mythicmobs.api.bukkit.events.MythicMechanicLoadEvent;
-import io.lumine.xikage.mythicmobs.apiexamples.conditions.InVehicleCondition;
-import io.lumine.xikage.mythicmobs.apiexamples.drops.SpecialItem;
-import io.lumine.xikage.mythicmobs.apiexamples.mechanics.WitherMechanic;
-import io.lumine.xikage.mythicmobs.drops.Drop;
-import io.lumine.xikage.mythicmobs.skills.SkillCondition;
-import io.lumine.xikage.mythicmobs.skills.SkillMechanic;
+import io.lumine.mythic.apiexamples.conditions.ExampleCondition;
+import io.lumine.mythic.apiexamples.drops.ExampleItem;
+import io.lumine.mythic.apiexamples.mechanics.ExampleMechanic;
+import io.lumine.mythic.bukkit.events.MythicConditionLoadEvent;
+import io.lumine.mythic.bukkit.events.MythicDropLoadEvent;
+import io.lumine.mythic.bukkit.events.MythicMechanicLoadEvent;
 
 public class APIExamples extends JavaPlugin implements Listener {
 
@@ -42,10 +39,9 @@ public class APIExamples extends JavaPlugin implements Listener {
 	public void onMythicMechanicLoad(MythicMechanicLoadEvent event)	{
 		log.info("MythicMechanicLoadEvent called for mechanic " + event.getMechanicName());
 		
-		if(event.getMechanicName().equalsIgnoreCase("WITHER"))	{
-			SkillMechanic mechanic = new WitherMechanic(event.getConfig());
-			event.register(mechanic);
-			log.info("-- Registered WITHER mechanic!");
+		if(event.getMechanicName().equalsIgnoreCase("EXAMPLE"))	{
+		    event.register(new ExampleMechanic(event.getConfig()));
+			log.info("-- Registered Example mechanic!");
 		}
 	}
 	
@@ -56,10 +52,9 @@ public class APIExamples extends JavaPlugin implements Listener {
 	public void onMythicConditionLoad(MythicConditionLoadEvent event)	{
 		log.info("MythicConditionLoadEvent called for condition " + event.getConditionName());
 
-		if(event.getConditionName().equalsIgnoreCase("INVEHICLE"))	{
-			SkillCondition condition = new InVehicleCondition(event.getConfig());
-			event.register(condition);
-			log.info("-- Registered InVehicle dondition!");
+		if(event.getConditionName().equalsIgnoreCase("EXAMPLE"))	{
+			event.register(new ExampleCondition(event.getConfig()));
+			log.info("-- Registered Example condition!");
 		}
 	}
 	
@@ -70,10 +65,9 @@ public class APIExamples extends JavaPlugin implements Listener {
 	public void onMythicDropLoad(MythicDropLoadEvent event)	{
 		log.info("MythicDropLoadEvent called for drop " + event.getDropName());
 
-		if(event.getDropName().equalsIgnoreCase("SPECIAL"))	{
-			Drop drop = new SpecialItem(event.getConfig());
-			event.register(drop);
-			log.info("-- Registered SPECIAL drop!");
+		if(event.getDropName().equalsIgnoreCase("EXAMPLE"))	{
+			event.register(new ExampleItem(event.getConfig(), event.getArgument()));
+			log.info("-- Registered Excample drop!");
 		}
 	}
 }

@@ -1,4 +1,4 @@
 name: MythicMobs-APIExamples
-main: io.lumine.xikage.mythicmobs.apiexamples.APIExamples
+main: io.lumine.mythic.apiexamples.APIExamples
 version: 1.0
 depend: [MythicMobs]
