@@ -2,6 +2,8 @@ package io.lumine.mythic.apiexamples;
 
 import java.util.logging.Logger;
 
+import io.lumine.mythic.apiexamples.factionprovider.ExampleFactionProvider;
+import io.lumine.mythic.bukkit.MythicBukkit;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.event.EventHandler;
@@ -24,6 +26,8 @@ public class APIExamples extends JavaPlugin implements Listener {
 	public void onEnable() {
 		log = this.getLogger();
 		Bukkit.getPluginManager().registerEvents(this, this);
+
+		factionProviderLoad(MythicBukkit.inst());
 		
 		log.info("MythicMobs API Examples Plugin Enabled!");
 	}
@@ -32,8 +36,8 @@ public class APIExamples extends JavaPlugin implements Listener {
 		log.info("MythicMobs API Examples Plugin Disabled!");
 	}
 
-	/*
-	 * Registers all of the custom mechanics when MythicMechanicLoadEvent is called
+	/**
+	 * Registers all the custom mechanics when MythicMechanicLoadEvent is called
 	 */
 	@EventHandler
 	public void onMythicMechanicLoad(MythicMechanicLoadEvent event)	{
@@ -45,8 +49,8 @@ public class APIExamples extends JavaPlugin implements Listener {
 		}
 	}
 	
-	/*
-	 * Registers all of the custom conditions when MythicConditionLoadEvent is called
+	/**
+	 * Registers all the custom conditions when MythicConditionLoadEvent is called
 	 */
 	@EventHandler
 	public void onMythicConditionLoad(MythicConditionLoadEvent event)	{
@@ -58,8 +62,8 @@ public class APIExamples extends JavaPlugin implements Listener {
 		}
 	}
 	
-	/*
-	 * Registers all of the custom drops when MythicDropLoadEvent is called
+	/**
+	 * Registers all the custom drops when MythicDropLoadEvent is called
 	 */
 	@EventHandler
 	public void onMythicDropLoad(MythicDropLoadEvent event)	{
@@ -67,7 +71,14 @@ public class APIExamples extends JavaPlugin implements Listener {
 
 		if(event.getDropName().equalsIgnoreCase("EXAMPLE"))	{
 			event.register(new ExampleItem(event.getConfig(), event.getArgument()));
-			log.info("-- Registered Excample drop!");
+			log.info("-- Registered Example drop!");
 		}
+	}
+
+	/**
+	 * Registers the custom faction provider when the plugin is loaded
+	 */
+	public void factionProviderLoad(MythicBukkit mythicBukkit) {
+		mythicBukkit.getPlayerManager().registerFactionProvider(new ExampleFactionProvider());
 	}
 }
